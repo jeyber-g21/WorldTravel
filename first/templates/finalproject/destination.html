@@ -1,0 +1,119 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+<div class="header_image_index">
+  <img src="https://viajerossinfin.com/wp-content/uploads/2012/10/RIO-JANEIRO-NUEVA.jpg" alt="Europe_image" class="header_image_index_image">
+</div><hr>
+<div class="welcome_paragraph">
+  <p style="font-size: larger;">With more than 1000 adventures in over 100 countries,
+     we are now covering more of the globe than ever before  north to south, east to west.
+    </p>
+    <p>Mountains to the lowlands, cities to the seas. So whether it’s the Arctic’s apex or
+       Antarctica’s underside, Africa’s wilds or Europe’s elegance you seek – we’re there.
+        There to get you off the beaten track, behind the scenes and really in the thick of the destination that's calling you.</p>
+  </div><br>
+  <hr>
+    <div class="filter_index">
+      <h5><strong>Search any trip:</strong></h5>
+    </div>
+    <div class="container_select">
+    <form action="{% url 'trips' %}" method="POST">
+        {% csrf_token %}
+          <label for="travel">Continents: </label>
+          <select class="select_continent" name="continent" id="travel" required>
+            <option value="">...</option>
+            {% for i in continents %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+          </select>
+          
+          <label for="travel_month">Month: </label>
+          <select class="select_continent" name="month" id="travel_month" required>
+            <option value="">...</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>            
+          </select>
+          <div class="wishlist_button">
+            <button type="submit">Select</a>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary">select</button> -->
+    </form></div><hr><br>
+    <div class="some_our_trips">
+      <h3>Where you can go</h3>
+    </div>
+    <div class="welcome_paragraph">
+      {% if message %}
+          <h4>{{ message }}</h4>
+      {% endif %}
+    </div>
+    <br>
+    <div class="fg">
+    <div class="row">
+    {% for i in travel %}
+    <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="{{i.image1}}" alt="NOTHING" class="card-image">
+            <h5 class="card-title">{{i.title}}</h5>
+            <p class="card-text">{{i.short_description}}</p>
+            <a href="{% url 'travel' id=i.id %}" class="btn btn-primary">Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+</div>
+<hr><br>
+<div class="welcome_paragraph">
+  <h2></h2>
+  </div>
+  <div class="travel_img2">
+    <img src="https://swissxplorer.com/wp-content/uploads/2023/06/switzerland-mountains-lakes.jpg" alt="Europe_image" class="header_image_index_image">
+    <div class="travel_img_text">
+     <h4><strong>"Live life with no excuses, travel with no regrets"</strong></h4>
+    </div>
+   </div>
+<hr><br>
+    <div class="questions_index">
+      <h4>If you have some questions, you can send an email to contact us:</h4>
+      <i class="fa-solid fa-envelope fa-2x"></i>
+    </div><br>
+    <div class="form">
+    <form action="{% url 'email' %}" method="post">
+        {% csrf_token %}
+        <div class="inside_form">
+        <div class="form-group">
+            <!-- <label for="exampleInputPassword1">Password</label> -->
+            <input type="name" class="form-control" id="exampleInputPassword1" placeholder="Name..." name="name">
+          </div><br>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Name</label> -->
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email..." name="email">
+          </div><br>
+          <br>
+          <div class="form-group">
+            <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" cols="40" placeholder="Message..." name="message" ></textarea>
+          </div><br>
+          <div class="wishlist_button">
+            <button type="submit">Select</a>
+          </div>
+        
+      </div>
+      </form>
+    </div>
+    
+    
+    
+
+{% endblock %}

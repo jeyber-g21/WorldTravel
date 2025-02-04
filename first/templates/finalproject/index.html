@@ -1,0 +1,301 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+   
+    <div class="header_image_index">
+      <img src="https://co.cdnmega.com/colombia/covers/budapest-hungria-parlamento-atardecer.jpg" alt="Europe_image" class="header_image_index_image">
+    </div>
+    {% if messages %}
+     {% for message in messages %}
+     <div class="mx-5" style="margin-top: 3em;"> 
+     <div class="alert alert-success" role="alert" style="display: flex; justify-content: center; text-transform: capitalize;">
+        {{message}}
+      </div>
+    </div>
+     {% endfor %}
+    {% endif %}
+    <br>
+    
+    {% if user.is_authenticated %}
+        <li class="welcome_user">
+             <h4><strong>Welcome, {{ user.username }}</strong></h4>
+        </li>
+    {% endif %}<br>
+    <div class="welcome_paragraph">
+    <p>We're thrilled to have you here. We invite you to explore the most fascinating destinations,
+       immerse yourself in new cultures, and create unforgettable memories. Whether you're seeking adventure, relaxation,
+        or a rich cultural experience, we have the perfect tour tailored just for you.
+      </p>
+      <p>Thank you for choosing us. Get ready for the adventure of a lifetime!</p>
+    </div><br><hr>
+    <div class="filter_index">
+      <h5><strong>Search any trip:</strong></h5>
+    </div>
+    <div class="container_select">
+    <form action="{% url 'trips' %}" method="POST">
+        {% csrf_token %}
+        <label for="travel">Continents: </label>
+          <select class="select_continent" name="continent" id="travel" required>
+            <option value="">...</option>
+            {% for i in continents %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+          </select>
+          <label for="travel_month">Month: </label>
+          <select class="select_continent" name="month" id="travel_month" required>
+            <option value="">...</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>            
+          </select>
+          <div class="wishlist_button">
+            <button type="submit">Select</a>
+        </div>
+          <!-- <button type="submit" class="btn btn-primary">select</button> -->
+    </form></div><br><hr>
+    <!-- <div class="second_paragraph_index">
+      <h5><strong>1000s of experiences, over 100 countries</strong></h5><br>
+      <p>Small group adventures that bring you the moments only Intrepid can offer. 
+        Only here. Only now. </p>
+    </div><br> --><br>
+    <div class="some_our_trips">
+      <h3>Some our trips...</h3>
+    </div>
+    <!-- SECON CARD   -->
+    <div class="body_second">
+      <div class="container_second swiper">
+        <div class="slider-wrapper">
+          <div class="card-list swiper-wrapper">
+            
+            <div class="card-item swiper-slide">      
+              <a href="{% url 'travel' id=16 %}" class="card-link">    
+              <img src="https://www.volunteerforever.com/wp-content/uploads/2023/09/iStock-682284814.jpg" alt="user" class="user-image">
+              <div class="left-content">
+              <p class="badge">South Africa</p>
+              <p class="user-profession" style="color: black;">South Africa is a destination that offers a unique blend of natural beauty, rich cultural history, and diverse experiences.</p>
+              <button class="card-button material-symbols-outlined">arrow_forward</button>
+            </div></a></div>
+            <div class="card-item swiper-slide">      
+              <a href="{% url 'travel' id=14 %}" class="card-link">    
+              <img src="https://www.traveldoctor.com.au/sites/default/files/2017-09/Eastern-Europe.jpg" alt="user" class="user-image">
+              <div class="left-content">
+              <p class="badge">East Europe</p>
+              <p class="user-profession" style="color: black;">There are several compelling reasons to travel to Eastern Europe, whether you’re drawn to its history, culture or landscapes.</p>
+              <button class="card-button material-symbols-outlined">arrow_forward</button>
+            </div></a></div>
+            <div class="card-item swiper-slide">      
+              <a href="{% url 'travel' id=20 %}" class="card-link">    
+              <img src="https://ik.imgkit.net/3vlqs5axxjf/TAW/ik-seo/uploadedImages/Content-Travel_Types/Adventure_Travel/Features/ATTA%20Asia%20Survey_HERO/Adventure-Travel-Shows-Strong-Rebound-in-Asia-and-.jpg?tr=w-1008%2Ch-567%2Cfo-auto" alt="user" class="user-image">
+              <div class="left-content">
+              <p class="badge">West Asia</p>
+              <p class="user-profession" style="color: black;">West Asia — a region that includes countries like Turkey, Iran, Israel, Jordan, Lebanon, and parts of the Arabian Peninsula.</p>
+              <button class="card-button material-symbols-outlined">arrow_forward</button>
+            </div></a></div>
+            <div class="card-item swiper-slide">      
+              <a href="{% url 'travel' id=21 %}" class="card-link">    
+              <img src="https://www.attractionsnearme.co.uk/wp-content/uploads/2024/04/The-Best-Cities-in-Western-Europe-for-Your-Travel-Bucket-List-London.jpg" alt="user" class="user-image">
+              <div class="left-content">
+              <p class="badge">West Europe</p>
+              <p class="user-profession" style="color: black;">Western Europe is a journey through some of the world's most historically rich and geographically diverse destinations.</p>
+              <button class="card-button material-symbols-outlined">arrow_forward</button>
+            </div></a></div>
+            <div class="card-item swiper-slide">      
+              <a href="{% url 'travel' id=15 %}" class="card-link">    
+              <img src="https://uploads.exoticca.com/es_ES/destination/poi/cartagena-de-indias.png" alt="user" class="user-image">
+              <div class="left-content">
+              <p class="badge">East South America</p>
+              <p class="user-profession" style="color: black;">South America is a continent bursting with incredible diversity, from its natural wonders to its rich cultural heritage.</p>
+              <button class="card-button material-symbols-outlined">arrow_forward</button>
+            </div></a></div>
+           
+            
+          </div>
+
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div>
+    <!-- ENDCARD --><br>
+    <div class="welcome_paragraph">
+      <p>Good traveling, or travel that is meaningful and enriching, has many benefits that contribute
+         to personal growth, well-being, and a deeper understanding of the world. 
+        </p>
+        <p>In essence, "good" traveling is about gaining a deeper connection with the world around
+           you—whether through self-discovery, cultural exchange, or simply finding joy in new experiences.
+            It's about learning, growing, and seeing the world with fresh eyes.</p>
+      </div><br><hr>
+    <!-- CARDSSSS -->
+     <div class="travel_img2">
+       <img src="https://academia-malaga.es/wp-content/uploads/2023/04/travel-journey-trip.jpg" alt="Europe_image" class="header_image_index_image">
+       <div class="travel_img_text">
+        <p>SMALL GROUP TRAVEL THAT'S GOOD ALL OVER</p><br>
+        <h4><strong>We're here to do good by creating positive change through the joy of travel.</strong></h4>
+       </div>
+      </div>
+    <!-- <div class="slider1">
+      
+      <div class="container swiper">
+        <div class="card-wrapper">
+          <ul class="card-list swiper-wrapper">
+            
+            <li class="card-item swiper-slide swiper-slide">
+              <a href="{% url 'travel' id=1 %}" class="card-link">
+                <img src="https://caracol.com.co/resizer/v2/TM4CRALQEBGMTDJLYI3LWUTS2U.jpg?auth=c9a0e9e461776179fb01e4bc909f24c78909b74a070f739ce632e4c1f8822790&width=650&height=488&quality=70&smart=true" alt="NOTHING" class="card-image">
+                <p class="badge">title</p>
+                <h2 class="card-title">Parrafo</h2>
+                <button class="card-button material-symbols-outlined">
+                  arrow_forward
+                </button>
+              </a>
+            </li>
+            <li class="card-item swiper-slide swiper-slide">
+              <a href="" class="card-link">
+                <img src="https://caracol.com.co/resizer/v2/TM4CRALQEBGMTDJLYI3LWUTS2U.jpg?auth=c9a0e9e461776179fb01e4bc909f24c78909b74a070f739ce632e4c1f8822790&width=650&height=488&quality=70&smart=true" alt="NOTHING" class="card-image">
+                <p class="badge">title</p>
+                <h2 class="card-title">Parrafo</h2>
+                <button class="card-button material-symbols-outlined">
+                  arrow_forward
+                </button>
+              </a>
+            </li>
+            <li class="card-item swiper-slide swiper-slide">
+              <a href="" class="card-link">
+                <img src="https://caracol.com.co/resizer/v2/TM4CRALQEBGMTDJLYI3LWUTS2U.jpg?auth=c9a0e9e461776179fb01e4bc909f24c78909b74a070f739ce632e4c1f8822790&width=650&height=488&quality=70&smart=true" alt="NOTHING" class="card-image">
+                <p class="badge">title</p>
+                <h2 class="card-title">Parrafo</h2>
+                <button class="card-button material-symbols-outlined">
+                  arrow_forward
+                </button>
+              </a>
+            </li>      
+            <li class="card-item swiper-slide swiper-slide">
+              <a href="" class="card-link">
+                <img src="https://caracol.com.co/resizer/v2/TM4CRALQEBGMTDJLYI3LWUTS2U.jpg?auth=c9a0e9e461776179fb01e4bc909f24c78909b74a070f739ce632e4c1f8822790&width=650&height=488&quality=70&smart=true" alt="NOTHING" class="card-image">
+                <p class="badge">title</p>
+                <h2 class="card-title">Parrafo</h2>
+                <button class="card-button material-symbols-outlined">
+                  arrow_forward
+                </button>
+              </a>
+            </li> 
+            
+          </ul>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div> 
+      
+    </div> -->
+    
+      
+    <!-- ENDCARDS -->
+    <hr><br>
+    <div class="questions_index">
+      <h4>If you have some questions, you can send an email to contact us:</h4>
+      <i class="fa-solid fa-envelope fa-2x"></i>
+    </div><br>
+    <div class="form">
+    <form action="{% url 'email' %}" method="post">
+        {% csrf_token %}
+        <div class="inside_form">
+        <div class="form-group">
+            <!-- <label for="exampleInputPassword1">Password</label> -->
+            <input type="name" class="form-control" id="exampleInputPassword1" placeholder="Name..." name="name">
+          </div><br>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Name</label> -->
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email..." name="email">
+          </div><br>
+          <br>
+          <div class="form-group">
+            <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" cols="40" placeholder="Message..." name="message" ></textarea>
+          </div><br>
+          <div class="wishlist_button">
+            <button type="submit">Select</a>
+          </div>
+        
+      </div>
+      </form>
+    </div>
+    
+ 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+<script>
+  const swiper = new Swiper('.slider-wrapper', {
+  
+  loop: true,
+  spaceBetween: 20,
+  grabCursor:true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    clickable:true,
+    dynamicBullets:true
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints:{
+    0:{
+      slidesPerView:1
+    },
+    620:{
+      slidesPerView:2
+    },
+    1024:{
+      slidesPerView:3
+    },
+  }
+ 
+});
+</script>
+<!-- <script>
+  new Swiper('.card-wrapper', {
+  loop: true,
+  spaceBetween: 25,
+  // slidesPerview:3,
+  // centerSlide: 'true',
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    dynamicBullets: true,
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints:{
+    0:{
+      slidesPerView: 1
+    },
+    768:{
+      slidesPerView: 2
+    },
+    998:{
+      slidesPerView: 3
+    },
+  }
+});
+</script> -->
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+
+<div class="welcome_paragraph">
+  {% if message %}
+      <h4>{{ message }}</h4>
+  {% endif %}
+</div>
+  <div class="register_page">
+    <div class="mx-5"><h3>Register</h3></div><br>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+      <div class="mx-5">
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+      </div><br>
+      <div class="mx-5">
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div></div><br>
+        <div class="mx-5">
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div></div><br>
+        <div class="mx-5">
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div></div><br>
+        <div class="mx-5">
+        <input class="btn btn-primary" type="submit" value="Register">
+         </div><br>
+    </form>
+   
+    <div class="mx-5">
+     Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </div>
+  </div>
+{% endblock %}

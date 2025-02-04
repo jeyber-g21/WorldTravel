@@ -1,0 +1,25 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+<div class="header_image_index">
+    <img src="https://viajerossinfin.com/wp-content/uploads/2012/10/RIO-JANEIRO-NUEVA.jpg" alt="Europe_image" class="header_image_index_image">
+  </div><hr>
+  <div class="welcome_paragraph">
+    <p style="font-size: larger;">With more than 1000 adventures in over 100 countries,
+       we are now covering more of the globe than ever before  north to south, east to west.
+      </p>
+      <p>Mountains to the lowlands, cities to the seas. So whether it’s the Arctic’s apex or
+         Antarctica’s underside, Africa’s wilds or Europe’s elegance you seek – we’re there.
+          There to get you off the beaten track, behind the scenes and really in the thick of the destination that's calling you.</p>
+    </div><br>
+    <hr>
+    <div class="some_our_trips">
+        <h3>Deals</h3>
+      </div>
+    <div class="welcome_paragraph">
+        {% if message %}
+            <h4>{{ message }}</h4>
+        {% endif %}
+      </div>
+    <br>
+{% endblock %}

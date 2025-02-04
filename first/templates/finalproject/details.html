@@ -1,0 +1,271 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+
+<br>
+{% for i in travel %}
+<div class="welcome_paragraph">
+<h1>{{i.title}}</h1>
+</div>
+<div class="header_image_index">
+    <img src="{{i.image1}}" alt="NOTHING" class="card-image">
+</div><hr>
+<div class="price_details">
+    <span>from</span>
+    <span class="price_number"><strong>USD ${{i.price}}</strong></span>
+</div>
+
+<div class="some_our_trips">
+    <h4>Months available</h4>
+  </div>
+<div class="month_available">
+{% for f in i.time.all %}
+ <ul>
+    <li>
+        <span class="items_month"><strong>{{f.month_departure}}</strong></span>
+    </li>
+ </ul>
+    
+{% endfor %}
+</div><br><br>
+<div class="welcome_paragraph">
+    <p>{{i.description1}}</p>
+</div>
+<div class="some_our_trips">
+    <h3><strong>Food</strong></h3>
+  </div>
+<div class="travel_img2">
+    <img src="{{i.image2}}" alt="Europe_image" class="header_image_index_image">
+    <div class="travel_img_text">
+     <p>{{i.description2}}</p><br>
+     </div>
+   </div>
+
+<div class="body_flexibleaccordion">
+    <div class="accordion">
+        <div class="accordion-content">
+            <header>
+                <span class="title"><strong>History Landmark</strong></span>
+                <i class="fa-solid fa-plus"></i>
+            </header>
+            <p class="description">{{i.description3}}</p>
+            <ul>
+                <li>- {{i.description4}}</li>
+                <li>- {{i.description5}}</li>
+            </ul>
+        </div>
+        <!-- <div class="accordion-content">
+            <header>
+                <span class="title">holass</span>
+                <i class="fa-solid fa-plus"></i>
+            </header>
+            <p class="description">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, tempora maxime harum doloremque sint vel cumque velit tempore, commodi, cum distinctio necessitatibus. Voluptatibus excepturi, repellendus sunt sed ratione debitis rerum.
+            </p>
+        </div> -->
+    </div>
+</div>
+<br>
+<div class="img_shared">
+    <img src="{{i.image3}}" alt="Europe_image" class="header_image_index_image">
+    <img src="{{i.image4}}" alt="Europe_image" class="header_image_index_image">
+   </div>
+<br>
+<!-- /////////////////////////////////////////////////////////// -->
+<div class="body_flexibleaccordion">
+    <div class="accordion">
+        <div class="accordion-content">
+            <header>
+                <span class="title"><strong>Natural Beauty</strong></span>
+                <i class="fa-solid fa-plus"></i>
+            </header>
+            <p class="description">{{i.description6}}</p>
+            <ul>
+                <li>- {{i.description7}}</li>
+            </ul>
+        </div>
+        <!-- <div class="accordion-content">
+            <header>
+                <span class="title">holass</span>
+                <i class="fa-solid fa-plus"></i>
+            </header>
+            <p class="description">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, tempora maxime harum doloremque sint vel cumque velit tempore, commodi, cum distinctio necessitatibus. Voluptatibus excepturi, repellendus sunt sed ratione debitis rerum.
+            </p>
+        </div> -->
+    </div>
+</div>
+<br>
+<div class="img_shared">
+    <img src="{{i.image5}}" alt="Europe_image" class="header_image_index_image">
+    <img src="{{i.image6}}" alt="Europe_image" class="header_image_index_image">
+   </div>
+<br>
+<div class="some_our_trips">
+    <h3><strong>Friendly local</strong></h3>
+  </div>
+<div class="travel_img2">
+    <img src="{{i.image7}}" alt="Europe_image" class="header_image_index_image">
+    <div class="travel_img_text">
+     <p>{{i.description8}}</p><br>
+     </div>
+   </div>
+<br><hr><br>
+<div class="welcome_paragraph">
+    <p>{{i.description9}}</p>
+</div><br>
+<div class="header_image_index">
+    <img src="{{i.image8}}" alt="Europe_image" class="header_image_index_image">
+</div>
+<hr>
+   
+   
+<form action="{% url 'booking' id=i.id %}" method="POST">
+    {% csrf_token %}   
+    <div class="container_select">
+        <label for="date">Months available: </label>
+        <select class="select_month" name="exact_month" id="date" required>
+          <option value="">...</option>
+          {% for f in i.time.all %}
+            <option value="{{f.month_departure}}">{{f.month_departure}}</option>
+            {% endfor %}
+        </select> 
+        </div>
+        <div class="button_place">
+        <div class="wishlist_button">
+            <button type="submit">Booking</a>
+        </div>
+    </div>
+</form> 
+
+<!-- Button trigger modal -->
+
+  
+  
+
+<!-- <div class="card"> 
+  <button type="button" class="dismiss">×</button> 
+  <div class="header"> 
+    <div class="image">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+      </div> 
+      <div class="content">
+         <span class="title">Order validated</span> 
+         <p class="message">Thank you for your purchase. you package will be delivered within 2 days of your purchase</p> 
+         </div> 
+         <div class="actions">
+            <button type="button" class="history">History</button> 
+            <button type="button" class="track">Track my package</button> 
+            </div> 
+            </div> 
+            </div> -->
+
+
+<div class="button_place">
+    <div class="wishlist_button">
+        {% if listwatchlist %}
+                <form action="{% url 'removewatchlist' id=i.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Remove from wishlist</a>
+                </form>
+            {% else %}
+            <form action="{% url 'addwatchlist' id=i.id %}" method="POST">
+                    {% csrf_token %}
+                    
+                        <button type="submit" data-toggle="modal" data-target="#exampleModal">Add to wishlist</a>
+                    
+            </form>
+        {%endif%}
+    </div>
+</div>
+     <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="image">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+            </div> 
+        </div>
+        <div class="modal-body">
+            <div class="content">
+                <span class="title">trip added to wishlist</span> 
+                <p class="message">Thank you for choose us.</p> 
+                </div> 
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+      
+   
+    
+    <!-- <div class="container_details">
+        <div class="select-btn">
+            <span class="btn-text">Aditionals</span>
+            <span class="arrow-dwn">
+                <i class="fa-solid fa-chevron-down"></i>
+            </span>
+        </div>
+        <ul class="list-items">
+            <li class="item">
+                <span class="checkbox">
+                    <i class="fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">first option</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">second option</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">third option</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">fourth  option</span>
+            </li>
+        </ul>
+    </div> -->
+    {% endfor %}
+    <script>
+        const accordionContent = document.querySelectorAll(".accordion-content");
+               
+        accordionContent.forEach((item, index) =>{
+            let header = item.querySelector("header");
+            header.addEventListener("click",()=>{
+                item.classList.toggle("open");
+                let description = item.querySelector(".description");
+                if(item.classList.contains("open")){
+                    description.style.height = `${description.scrollHeight}px`;
+                    item.querySelector("i").classList.replace("fa-plus","fa-minus");
+                }else{
+                    description.style.height = "0px";
+                    item.querySelector("i").classList.replace("fa-minus","fa-plus");
+                }
+                removeOpen(index);
+            })
+            
+        })
+        function removeOpen(index1){
+            accordionContent.forEach((item2, index2)=>{
+                if(index1 != index2){
+                   item2.classList.remove("open");
+                   let des =item2.querySelector(".description");
+                   des.style.height = "0px";
+                   item2.querySelector("i").classList.replace("fa-minus","fa-plus");
+                }
+            })
+        }
+    </script>
+{% endblock %}

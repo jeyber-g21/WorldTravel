@@ -1,0 +1,38 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+<div class="header_image_index">
+  <img src="https://ahoraeg.com/wp-content/uploads/2023/07/Paises-de-Africa.jpg" alt="Europe_image" class="header_image_index_image">
+</div><hr>
+<div class="welcome_paragraph">
+  <p style="font-size: larger;">“We live in a wonderful world that is full of beauty, charm and adventure. There is no end to the
+     adventures we can have if only we seek them with our eyes open.”</p>
+    
+  </div><br>
+  <hr>
+  <div class="some_our_trips">
+    <h3>Wishlist</h3>
+  </div>
+  {% if message %}
+  <div class="welcome_paragraph">
+       <h4>{{message}}</h4>
+      </div> 
+    {% endif %}
+<div class="fg">
+    <div class="row">
+    {% for i in travel %}
+    <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="{{i.image1}}" alt="NOTHING" class="card-image">
+            <h5 class="card-title">{{i.title}}</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="{% url 'travel' id=i.id %}" class="btn btn-primary">Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+</div>
+  
+{% endblock %}
